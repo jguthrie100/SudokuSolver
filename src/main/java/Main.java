@@ -27,5 +27,7 @@ public class Main {
         System.out.println("Thank you");
 
         System.out.println(board);
+
+        System.out.println(board.getTile(0, 0).getPossibleValues());
     }
 }

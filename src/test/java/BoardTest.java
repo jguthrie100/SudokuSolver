@@ -38,103 +38,47 @@ public class BoardTest {
     }
 
     @Test
-    public void testGetValueRowValidation() {
+    public void testGetTileRowValidation() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            board.getValue(-1, 3);
+            board.getTile(-1, 3);
         }, "Row number must be 0-8");
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            board.getValue(9, 3);
-        }, "Row number must be 0-8");
-
-        for (int i = 0; i < 9; i++) {
-            int finalI = i;
-            Assertions.assertDoesNotThrow(() -> {
-                board.getValue(finalI, 3);
-            });
-        }
-    }
-
-    @Test
-    public void testGetValueColumnValidation() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            board.getValue(0, -1);
-        }, "Column number must be 0-8");
-
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            board.getValue(0, 9);
-        }, "Column number must be 0-8");
-
-        for (int i = 0; i < 9; i++) {
-            int finalI = i;
-            Assertions.assertDoesNotThrow(() -> {
-                board.getValue(3, finalI);
-            });
-        }
-    }
-
-    @Test
-    public void testSetValueRowValidation() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            board.setValue(-1, 3, 9);
-        }, "Row number must be 0-8");
-
-        Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            board.setValue(9, 3, 9);
+            board.getTile(9, 3);
         }, "Row number must be 0-8");
 
         for (int i = 0; i < 9; i++) {
             int finalI = i;
             Assertions.assertDoesNotThrow(() -> {
-                board.setValue(finalI, 3, 9);
+                board.getTile(finalI, 3);
             });
         }
     }
 
     @Test
-    public void testSetValueColumnValidation() {
+    public void testGetTileColumnValidation() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            board.setValue(0, -1, 9);
+            board.getTile(0, -1);
         }, "Column number must be 0-8");
 
         Assertions.assertThrows(IllegalArgumentException.class, () -> {
-            board.setValue(0, 9, 9);
+            board.getTile(0, 9);
         }, "Column number must be 0-8");
 
         for (int i = 0; i < 9; i++) {
             int finalI = i;
             Assertions.assertDoesNotThrow(() -> {
-                board.setValue(3, finalI, 9);
+                board.getTile(3, finalI);
             });
         }
     }
 
     @Test
-    public void testSetValueValidation() {
-        Assertions.assertThrows(NumberFormatException.class, () -> {
-            board.setValue(0, 0, 0);
-        }, "Tile value must be null or 1-9");
+    public void testGetTile() {
+        Assertions.assertNull(board.getTile(0, 0).getValue());
 
-        Assertions.assertThrows(NumberFormatException.class, () -> {
-            board.setValue(0, 0, 10);
-        }, "Tile value must be null or 1-9");
+        board.getTile(0, 0).setValue(9);
 
-        for (int i = 1; i <= 9; i++) {
-            int finalI = i;
-            Assertions.assertDoesNotThrow(() -> {
-                board.setValue(0, 0, finalI);
-            });
-        }
-
-        Assertions.assertDoesNotThrow(() -> {
-            board.setValue(0, 0, null);
-        });
-    }
-
-    @Test
-    public void testSetValue() {
-        board.setValue(3, 3, 3);
-
-        Assertions.assertEquals(3, board.getValue(3, 3));
+        Assertions.assertEquals(9, board.getTile(0, 0).getValue());
     }
 }

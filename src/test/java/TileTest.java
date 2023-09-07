@@ -41,4 +41,32 @@ public class TileTest {
 
         Assertions.assertEquals(9, tile1.getValue());
     }
+
+    @Test
+    public void testTileStartsOffWith9PossibleValues() {
+        Tile tile = new Tile();
+
+        Assertions.assertFalse(tile.getPossibleValues().contains(0));
+
+        for (int i = 1; i <= 9; i++) {
+            Assertions.assertTrue(tile.getPossibleValues().contains(i));
+        }
+
+        Assertions.assertFalse(tile.getPossibleValues().contains(10));
+    }
+
+    @Test
+    public void testAddAndRemovePossibleValue() {
+        Tile tile = new Tile();
+
+        Assertions.assertTrue(tile.getPossibleValues().contains(1));
+
+        tile.removePossibleValue(1);
+
+        Assertions.assertFalse(tile.getPossibleValues().contains(1));
+
+        tile.addPossibleValue(1);
+
+        Assertions.assertTrue(tile.getPossibleValues().contains(1));
+    }
 }

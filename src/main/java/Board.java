@@ -7,7 +7,7 @@ import java.util.List;
 public class Board {
 
     @Getter
-    List<List<Tile>> board;
+    private List<List<Tile>> board;
 
     public Board() {
         this.board = new ArrayList<>();
@@ -25,7 +25,7 @@ public class Board {
         this.board = Collections.unmodifiableList(this.board);
     }
 
-    public Integer getValue(int rowNo, int columnNo) {
+    public Tile getTile(int rowNo, int columnNo) {
         if (rowNo < 0 || rowNo > 8) {
             throw new IllegalArgumentException("Row number must be 0-8");
         }
@@ -33,21 +33,7 @@ public class Board {
             throw new IllegalArgumentException("Column number must be 0-8");
         }
 
-        return board.get(rowNo).get(columnNo).getValue();
-    }
-
-    public void setValue(int rowNo, int columnNo, Integer value) {
-        if (rowNo < 0 || rowNo > 8) {
-            throw new IllegalArgumentException("Row number must be 0-8");
-        }
-        if (columnNo < 0 || columnNo > 8) {
-            throw new IllegalArgumentException("Column number must be 0-8");
-        }
-        if (value != null && (value < 1 || value > 9)) {
-            throw new NumberFormatException("Tile value must be null or 1-9");
-        }
-
-        board.get(rowNo).get(columnNo).setValue(value);
+        return board.get(rowNo).get(columnNo);
     }
 
     public String toString() {

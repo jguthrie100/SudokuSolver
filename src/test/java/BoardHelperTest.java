@@ -22,15 +22,15 @@ public class BoardHelperTest {
             - - - - - - - 8 -
          */
 
-        board.setValue(0, 0, 9);
-        board.setValue(0, 4, 2);
-        board.setValue(1, 7, 1);
-        board.setValue(3, 0, 1);
-        board.setValue(4, 1, 9);
-        board.setValue(5, 4, 1);
-        board.setValue(5, 8, 9);
-        board.setValue(6, 2, 3);
-        board.setValue(8, 7, 8);
+        board.getTile(0, 0).setValue(9);
+        board.getTile(0, 4).setValue(2);
+        board.getTile(1, 7).setValue(1);
+        board.getTile(3, 0).setValue(1);
+        board.getTile(4, 1).setValue(9);
+        board.getTile(5, 4).setValue(1);
+        board.getTile(5, 8).setValue(9);
+        board.getTile(6, 2).setValue(3);
+        board.getTile(8, 7).setValue(8);
 
     }
 
