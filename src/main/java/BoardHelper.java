@@ -1,7 +1,9 @@
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class BoardHelper {
 
@@ -79,6 +81,87 @@ public class BoardHelper {
         }
 
         output.remove(null);
+        return output;
+    }
+
+    /*
+      Checks the row/column/3x3 section for any values that are not possible to use in any other cell in the row/column/3x3 section
+     */
+    public static Set<Integer> exclusivePossibleValues(List<List<Tile>> board, int rowNo, int columnNo) {
+        if (rowNo < 0 || rowNo > 8 || columnNo < 0 || columnNo > 8) {
+            throw new IllegalArgumentException("Row & Column numbers must be 0-8");
+        }
+
+        Set<Integer> exclusiveRowPossibleValues = exclusiveRowPossibleValues(board, rowNo, columnNo);
+        if (exclusiveRowPossibleValues.size() == 1) {
+            return exclusiveRowPossibleValues;
+        }
+
+        Set<Integer> exclusiveColumnPossibleValues = exclusiveColumnPossibleValues(board, rowNo, columnNo);
+        if (exclusiveColumnPossibleValues.size() == 1) {
+            return exclusiveColumnPossibleValues;
+        }
+
+        Set<Integer> exclusiveSectionPossibleValues = exclusiveSectionPossibleValues(board, rowNo, columnNo);
+        if (exclusiveSectionPossibleValues.size() == 1) {
+            return exclusiveSectionPossibleValues;
+        }
+
+        return new HashSet<>();
+    }
+
+    private static Set<Integer> exclusiveRowPossibleValues(List<List<Tile>> board, int rowNo, int columnNo) {
+        if (rowNo < 0 || rowNo > 8 || columnNo < 0 || columnNo > 8) {
+            throw new IllegalArgumentException("Row & Column numbers must be 0-8");
+        }
+
+        Set<Integer> output = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
+
+        // Collect all non-possible values from other cells in the row
+        IntStream
+                .range(0, board.size())
+                .filter(colI -> colI != columnNo)
+                .forEach(colI -> {
+                    output.removeAll(board.get(rowNo).get(colI).getPossibleValues());
+                });
+
+        return output;
+    }
+
+    private static Set<Integer> exclusiveColumnPossibleValues(List<List<Tile>> board, int rowNo, int columnNo) {
+        if (rowNo < 0 || rowNo > 8 || columnNo < 0 || columnNo > 8) {
+            throw new IllegalArgumentException("Row & Column numbers must be 0-8");
+        }
+
+        Set<Integer> output = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
+
+        // Collect all non-possible values from other cells in the column
+        IntStream
+                .range(0, board.size())
+                .filter(rowI -> rowI != rowNo)
+                .forEach(rowI -> {
+                    output.removeAll(board.get(rowI).get(columnNo).getPossibleValues());
+                });
+
+        return output;
+    }
+
+    private static Set<Integer> exclusiveSectionPossibleValues(List<List<Tile>> board, int rowNo, int columnNo) {
+        if (rowNo < 0 || rowNo > 8 || columnNo < 0 || columnNo > 8) {
+            throw new IllegalArgumentException("Row & Column numbers must be 0-8");
+        }
+
+        Set<Integer> output = new HashSet<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
+
+        // Collect all non-possible values from other cells in the section
+        for (int rowI = (rowNo / 3) * 3; rowI < (rowNo / 3) * 3 + 3; rowI++) {
+            for (int colJ = (columnNo / 3) * 3; colJ < (columnNo / 3) * 3 + 3; colJ++) {
+                if (rowI == rowNo && colJ == columnNo) continue;
+
+                output.removeAll(board.get(rowI).get(colJ).getPossibleValues());
+            }
+        }
+
         return output;
     }
 

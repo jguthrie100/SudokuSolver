@@ -19,19 +19,69 @@ public class BoardHelperTest {
             - - - - 1 - - - 9
             - - 3 - - - - - -
             - - - - - - - - -
-            - - - - - - - 8 -
+            - - - - - - 9 8 -
          */
 
         board.getTile(0, 0).setValue(9);
-        board.getTile(0, 4).setValue(2);
-        board.getTile(1, 7).setValue(1);
-        board.getTile(3, 0).setValue(1);
-        board.getTile(4, 1).setValue(9);
-        board.getTile(5, 4).setValue(1);
-        board.getTile(5, 8).setValue(9);
-        board.getTile(6, 2).setValue(3);
-        board.getTile(8, 7).setValue(8);
+        board.getTile(0, 0).getPossibleValues().removeAll(Set.of(1, 2, 3, 4, 5, 6, 7, 8));
 
+        board.getTile(0, 4).setValue(2);
+        board.getTile(0, 4).getPossibleValues().removeAll(Set.of(1, 3, 4, 5, 6, 7, 8, 9));
+
+        board.getTile(1, 7).setValue(1);
+        board.getTile(1, 7).getPossibleValues().removeAll(Set.of(1, 2, 3, 4, 5, 6, 8, 9));
+
+        board.getTile(3, 0).setValue(1);
+        board.getTile(3, 0).getPossibleValues().removeAll(Set.of(2, 3, 4, 5, 6, 7, 8, 9));
+
+        board.getTile(4, 1).setValue(9);
+        board.getTile(4, 1).getPossibleValues().removeAll(Set.of(1, 2, 3, 4, 5, 6, 7, 8));
+
+        board.getTile(5, 4).setValue(1);
+        board.getTile(5, 4).getPossibleValues().removeAll(Set.of(2, 3, 4, 5, 6, 7, 8, 9));
+
+        board.getTile(5, 8).setValue(9);
+        board.getTile(5, 8).getPossibleValues().removeAll(Set.of(1, 2, 3, 4, 5, 6, 7, 8));
+
+        board.getTile(6, 2).setValue(3);
+        board.getTile(6, 2).getPossibleValues().removeAll(Set.of(1, 2, 4, 5, 6, 7, 8, 9));
+
+        board.getTile(8, 6).setValue(9);
+        board.getTile(8, 6).getPossibleValues().removeAll(Set.of(1, 2, 3, 4, 5, 6, 7, 8));
+
+        board.getTile(8, 7).setValue(8);
+        board.getTile(8, 7).getPossibleValues().removeAll(Set.of(1, 2, 3, 4, 5, 6, 7, 9));
+
+        // Test relevant possibleValues for row 7, col 2
+        // Column values
+        board.getTile(0, 2).getPossibleValues().removeAll(Set.of(2, 3, 9));
+        board.getTile(1, 2).getPossibleValues().removeAll(Set.of(1, 3, 9));
+        board.getTile(2, 2).getPossibleValues().removeAll(Set.of(3, 9));
+        board.getTile(3, 2).getPossibleValues().removeAll(Set.of(1, 3, 9));
+        board.getTile(4, 2).getPossibleValues().removeAll(Set.of(1, 3, 9));
+        board.getTile(5, 2).getPossibleValues().removeAll(Set.of(1, 3, 9));
+        board.getTile(6, 2).getPossibleValues().removeAll(Set.of(1, 2, 4, 5, 6, 7, 8, 9));
+        board.getTile(8, 2).getPossibleValues().removeAll(Set.of(3, 8, 9));
+
+        // Row values
+        board.getTile(7, 0).getPossibleValues().removeAll(Set.of(1, 3, 9));
+        board.getTile(7, 1).getPossibleValues().removeAll(Set.of(3, 9));
+        board.getTile(7, 3).getPossibleValues().removeAll(Set.of());
+        board.getTile(7, 4).getPossibleValues().removeAll(Set.of(1, 2));
+        board.getTile(7, 5).getPossibleValues().removeAll(Set.of());
+        board.getTile(7, 6).getPossibleValues().removeAll(Set.of(8, 9));
+        board.getTile(7, 7).getPossibleValues().removeAll(Set.of(1, 8, 9));
+        board.getTile(7, 8).getPossibleValues().removeAll(Set.of(8, 9));
+
+        // Section values
+        board.getTile(6, 0).getPossibleValues().removeAll(Set.of(1, 3, 9));
+        board.getTile(6, 1).getPossibleValues().removeAll(Set.of(3, 9));
+        board.getTile(6, 2).getPossibleValues().removeAll(Set.of(1, 2, 4, 5, 6, 7, 8, 9));
+        board.getTile(7, 0).getPossibleValues().removeAll(Set.of(1, 3, 9));
+        board.getTile(7, 1).getPossibleValues().removeAll(Set.of(3, 9));
+        board.getTile(8, 0).getPossibleValues().removeAll(Set.of(1, 3, 8, 9));
+        board.getTile(8, 1).getPossibleValues().removeAll(Set.of(3, 8, 9));
+        board.getTile(8, 2).getPossibleValues().removeAll(Set.of(3, 8, 9));
     }
 
     @Test
@@ -93,7 +143,7 @@ public class BoardHelperTest {
         Assertions.assertEquals(Set.of(), BoardHelper.rowValues(board.getBoard(), 2));
         Assertions.assertEquals(Set.of(1), BoardHelper.rowValues(board.getBoard(), 3));
         Assertions.assertEquals(Set.of(1, 9), BoardHelper.rowValues(board.getBoard(), 5));
-        Assertions.assertEquals(Set.of(8), BoardHelper.rowValues(board.getBoard(), 8));
+        Assertions.assertEquals(Set.of(8, 9), BoardHelper.rowValues(board.getBoard(), 8));
     }
 
     @Test
@@ -112,6 +162,11 @@ public class BoardHelperTest {
         Assertions.assertEquals(Set.of(1, 9), BoardHelper.sectionValues(board.getBoard(), 1, 0));
         Assertions.assertEquals(Set.of(3), BoardHelper.sectionValues(board.getBoard(), 2, 0));
         Assertions.assertEquals(Set.of(), BoardHelper.sectionValues(board.getBoard(), 2, 1));
-        Assertions.assertEquals(Set.of(8), BoardHelper.sectionValues(board.getBoard(), 2, 2));
+        Assertions.assertEquals(Set.of(8, 9), BoardHelper.sectionValues(board.getBoard(), 2, 2));
+    }
+
+    @Test
+    public void textExclusivePossibleValues() {
+        Assertions.assertEquals(Set.of(9), BoardHelper.exclusivePossibleValues(board.getBoard(), 7, 2));
     }
 }
