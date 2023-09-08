@@ -20,6 +20,8 @@ public class Main {
             for (int j = 0; j < 9; j++) {
                 if (!rowValues[j].equals("-")) {
                     board.getBoard().get(i).get(j).setValue(Integer.valueOf(rowValues[j]));
+                    board.getBoard().get(i).get(j).getPossibleValues().clear();
+                    board.getBoard().get(i).get(j).addPossibleValue(Integer.valueOf(rowValues[j]));
                 }
             }
         }
@@ -28,6 +30,10 @@ public class Main {
 
         System.out.println(board);
 
-        System.out.println(board.getTile(0, 0).getPossibleValues());
+        BoardRunner boardRunner = new BoardRunner(board);
+
+        for (int i = 0; i < 1000; i++) {
+            boardRunner.step();
+        }
     }
 }

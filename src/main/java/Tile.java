@@ -18,13 +18,17 @@ public class Tile {
     public Tile(Integer value) {
         setValue(value);
 
-        initPossibleValues();
+        // One value in the possibleValues set
+        possibleValues.add(value);
     }
 
     public void setValue(Integer value) {
         validate(value, true);
 
         this.value = value;
+
+        possibleValues.clear();
+        possibleValues.add(value);
     }
 
     public void addPossibleValue(Integer value) {
