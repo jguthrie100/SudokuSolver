@@ -1,4 +1,7 @@
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class BoardHelper {
 
@@ -44,6 +47,39 @@ public class BoardHelper {
         }
 
         return false;
+    }
+
+    public static Set<Integer> rowValues(List<List<Tile>> board, int rowNo) {
+        if (rowNo < 0 || rowNo > 8) {
+            throw new IllegalArgumentException("Row number must be 0-8");
+        }
+
+        return board.get(rowNo).stream().filter(tile -> tile.getValue() != null).map(tile -> tile.getValue()).collect(Collectors.toSet());
+    }
+
+    public static Set<Integer> columnValues(List<List<Tile>> board, int columnNo) {
+        if (columnNo < 0 || columnNo > 8) {
+            throw new IllegalArgumentException("Column number must be 0-8");
+        }
+
+        return board.stream().map(row -> row.get(columnNo)).filter(tile -> tile.getValue() != null).map(tile -> tile.getValue()).collect(Collectors.toSet());
+    }
+
+    public static Set<Integer> sectionValues(List<List<Tile>> board, int sectionRow, int sectionColumn) {
+        if (sectionRow < 0 || sectionRow > 8 || sectionColumn < 0 || sectionColumn > 8) {
+            throw new IllegalArgumentException("Row & Column numbers must be 0-8");
+        }
+
+        Set<Integer> output = new HashSet<>();
+
+        for (int rowI = sectionRow * 3; rowI < (sectionRow * 3) + 3; rowI++) {
+            for (int colJ = sectionColumn * 3; colJ < (sectionColumn * 3) + 3; colJ++) {
+                output.add(board.get(rowI).get(colJ).getValue());
+            }
+        }
+
+        output.remove(null);
+        return output;
     }
 
     public static String toString(List<List<Tile>> board) {

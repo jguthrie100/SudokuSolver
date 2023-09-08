@@ -2,7 +2,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
+import java.util.Set;
 
 public class BoardHelperTest {
 
@@ -85,5 +85,33 @@ public class BoardHelperTest {
 
         Assertions.assertFalse(BoardHelper.sectionContains(board.getBoard(), 0, 0, 1));
         Assertions.assertFalse(BoardHelper.sectionContains(board.getBoard(), 0, 2, 2));
+    }
+
+    @Test
+    public void testGetRowValues() {
+        Assertions.assertEquals(Set.of(2, 9), BoardHelper.rowValues(board.getBoard(), 0));
+        Assertions.assertEquals(Set.of(), BoardHelper.rowValues(board.getBoard(), 2));
+        Assertions.assertEquals(Set.of(1), BoardHelper.rowValues(board.getBoard(), 3));
+        Assertions.assertEquals(Set.of(1, 9), BoardHelper.rowValues(board.getBoard(), 5));
+        Assertions.assertEquals(Set.of(8), BoardHelper.rowValues(board.getBoard(), 8));
+    }
+
+    @Test
+    public void testGetColumnValues() {
+        Assertions.assertEquals(Set.of(1, 9), BoardHelper.columnValues(board.getBoard(), 0));
+        Assertions.assertEquals(Set.of(3), BoardHelper.columnValues(board.getBoard(), 2));
+        Assertions.assertEquals(Set.of(), BoardHelper.columnValues(board.getBoard(), 3));
+        Assertions.assertEquals(Set.of(1, 2), BoardHelper.columnValues(board.getBoard(), 4));
+        Assertions.assertEquals(Set.of(9), BoardHelper.columnValues(board.getBoard(), 8));
+    }
+
+    @Test
+    public void testGetSectionValues() {
+        Assertions.assertEquals(Set.of(9), BoardHelper.sectionValues(board.getBoard(), 0, 0));
+        Assertions.assertEquals(Set.of(1), BoardHelper.sectionValues(board.getBoard(), 0, 2));
+        Assertions.assertEquals(Set.of(1, 9), BoardHelper.sectionValues(board.getBoard(), 1, 0));
+        Assertions.assertEquals(Set.of(3), BoardHelper.sectionValues(board.getBoard(), 2, 0));
+        Assertions.assertEquals(Set.of(), BoardHelper.sectionValues(board.getBoard(), 2, 1));
+        Assertions.assertEquals(Set.of(8), BoardHelper.sectionValues(board.getBoard(), 2, 2));
     }
 }
