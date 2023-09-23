@@ -1,0 +1,30 @@
+.tile {
+  border: 1px solid #ccc;
+  text-align: center;
+  padding: 15px 0;
+  font-family: sans-serif;
+}
+
+.tile input {
+  font-size: 16px;
+  width: 10px;
+  text-align: center;
+  border: 0;
+  outline: 0;
+}
+
+.top {
+  border-top: 2px solid #000;
+}
+
+.bottom {
+  border-bottom: 2px solid #000;
+}
+
+.left {
+  border-left: 2px solid #000;
+}
+
+.right {
+  border-right: 2px solid #000;
+}
