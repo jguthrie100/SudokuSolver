@@ -8,6 +8,8 @@ public class BoardRunner {
     private int currentRow = 0;
     private int currentColumn = 0;
 
+    private int lastChange = 0;
+
     public BoardRunner(Board initialBoard) {
         this.board = initialBoard;
     }
@@ -31,30 +33,48 @@ public class BoardRunner {
             blockedValues.addAll(BoardHelper.rowValues(board.getBoard(), currentRow));
             blockedValues.addAll(BoardHelper.columnValues(board.getBoard(), currentColumn));
             blockedValues.addAll(BoardHelper.sectionValues(board.getBoard(), currentRow/3, currentColumn/3));
+            blockedValues.addAll(BoardHelper.determineNonPossibleValuesInRowOrColumn(board.getBoard(), currentRow, currentColumn));
 
-            currentTile.getPossibleValues().removeAll(blockedValues);
+            if (currentTile.getPossibleValues().removeAll(blockedValues)) {
+                lastChange = iteration;
+            }
+
+            if (BoardHelper.filterMatchingPossibleValuesFromOtherTiles(board.getBoard(), currentRow, currentColumn)) {
+                lastChange = iteration;
+            }
+
+            if (BoardHelper.removeNonPossibleSectionValues(board.getBoard(), currentRow, currentColumn)) {
+                lastChange = iteration;
+            }
 
             if (currentTile.getPossibleValues().size() == 1) {
                 currentTile.setValue((Integer) currentTile.getPossibleValues().toArray()[0]);
-                System.out.println("SET VALUE: " + currentTile.getValue());
                 return endStep();
             }
 
             Set<Integer> exclusivePossibleValues = BoardHelper.exclusivePossibleValues(board.getBoard(), currentRow, currentColumn);
             if (exclusivePossibleValues.size() == 1) {
                 currentTile.setValue((Integer) exclusivePossibleValues.toArray()[0]);
-                System.out.println("SET VALUE: " + currentTile.getValue());
                 return endStep();
             }
         }
 
-        endStep();
-
-        return false;
+        return endStep();
     }
 
     private boolean endStep() {
         incrementPosition();
+
+        if (iteration - lastChange > 200) {
+            System.out.println("State of board has not changed in the last 200 iterations. The puzzle is impossible to solve for this app");
+            return true;
+        }
+
+        if (!board.toString().contains("-")) {
+            System.out.println("Sudoku Complete!");
+            System.out.println(board.toString());
+            return true;
+        }
 
         System.out.println("Next iteration: " + iteration);
         System.out.println("Next position - Row: " + currentRow + ", Col: " + currentColumn);
