@@ -15,16 +15,18 @@ function Tile({ classes }) {
   }
 
   function handleTyping(event) {
-    let value = event.target.value.substr(-1);
+    if (event.key === "Delete" || event.key === "Backspace") {
+      setValue("");
+    }
 
-    if (value.match(/^[1-9]?$/)) {
-      setValue(value);
+    if (event.key.match(/^[1-9]?$/)) {
+      setValue(event.key);
     }
   }
 
   return (
     <div id={"tile_" + id} className={classes.join(" ")} onClick={handleTileClick}>
-      <input id={"input_" + id} onChange={handleTyping} value={value} />
+      <input id={"input_" + id} onChange={() => {}} onKeyDown={handleTyping} value={value} />
     </div>
   );
 }
