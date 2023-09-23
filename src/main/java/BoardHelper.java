@@ -301,7 +301,10 @@ public class BoardHelper {
 
                 possibleValue.getValue()
                         .stream()
-                        .forEach(entry -> entry.getPossibleValues().addAll(values));
+                        .forEach(entry -> {
+                            entry.getPossibleValues().clear();
+                            entry.getPossibleValues().addAll(values);
+                        });
 
                 return true;
             }
