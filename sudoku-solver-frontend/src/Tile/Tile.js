@@ -10,11 +10,20 @@ function Tile({ classes }) {
   classes = classes || [];
   classes.push("tile");
 
+  function highlightTile() {
+    document.getElementsByClassName("tile-selected")?.[0]?.classList?.remove("tile-selected");
+    document.getElementById("tile_" + id).classList.add("tile-selected");
+  }
+
   function handleTileClick() {
+    highlightTile();
+
     document.getElementById("input_" + id).focus();
   }
 
   function handleTyping(event) {
+    highlightTile();
+
     if (event.key === "Delete" || event.key === "Backspace") {
       setValue("");
     }

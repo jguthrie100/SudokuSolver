@@ -13,6 +13,10 @@
   outline: 0;
 }
 
+.tile-selected, .tile-selected input {
+  background-color: #e3e3e3;
+}
+
 .top {
   border-top: 2px solid #000;
 }
