@@ -1,3 +1,8 @@
+package base.sudoku;
+
+import base.sudoku.entity.Board;
+import base.sudoku.entity.Tile;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,6 +19,17 @@ public class BoardRunner {
         this.board = initialBoard;
     }
 
+    public Integer run() {
+        Integer outputCode;
+
+        while (true) {
+            outputCode = step();
+            if (outputCode >= 0) break;
+        }
+
+        return outputCode;
+    }
+
     /*
     Runs a step of the execution algorithm.
     Returns true if the puzzle is solved
@@ -23,7 +39,7 @@ public class BoardRunner {
       has 1 possible value, then we switch the value of the cell to that value.
       Keep looping around the board, narrowing down all the possible values until the board is complete
      */
-    public boolean step() {
+    public Integer step() {
         Tile currentTile = board.getBoard().get(currentRow).get(currentColumn);
 
         if (currentTile.getValue() == null) {
@@ -62,18 +78,18 @@ public class BoardRunner {
         return endStep();
     }
 
-    private boolean endStep() {
+    private Integer endStep() {
         incrementPosition();
 
-        if (iteration - lastChange > 200) {
-            System.out.println("State of board has not changed in the last 200 iterations. The puzzle is impossible to solve for this app");
-            return true;
+        if (iteration - lastChange > 500) {
+            System.out.println("State of board has not changed in the last 500 iterations. The puzzle is impossible to solve for this app");
+            return 2;
         }
 
         if (!board.toString().contains("-")) {
             System.out.println("Sudoku Complete!");
             System.out.println(board.toString());
-            return true;
+            return 1;
         }
 
         System.out.println("Next iteration: " + iteration);
@@ -81,7 +97,7 @@ public class BoardRunner {
         System.out.println(board.toString());
         System.out.println("\n_______________________________________________________\n");
 
-        return false;
+        return -1;
     }
 
     private void incrementPosition() {

@@ -1,3 +1,7 @@
+package base.sudoku;
+
+import base.sudoku.entity.Tile;
+
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -256,7 +260,6 @@ public class BoardHelper {
         return possibleTileValues;
     }
 
-    // Returns true if a change is made
     public static boolean filterMatchingPossibleValuesFromOtherTiles(List<List<Tile>> board, int rowNo, int columnNo) {
         if (rowNo < 0 || rowNo > 8 || columnNo < 0 || columnNo > 8) {
             throw new IllegalArgumentException("Row & Column numbers must be 0-8");
@@ -305,11 +308,10 @@ public class BoardHelper {
                             entry.getPossibleValues().clear();
                             entry.getPossibleValues().addAll(values);
                         });
-
-                return true;
             }
         }
 
+        // Currently always returns false. Not important for now
         return false;
     }
 

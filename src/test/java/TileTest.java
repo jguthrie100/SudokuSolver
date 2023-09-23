@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
+import base.sudoku.entity.Tile;
 
 public class TileTest {
 

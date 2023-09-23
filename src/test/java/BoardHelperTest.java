@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
+import base.sudoku.entity.Board;
+import base.sudoku.BoardHelper;
 
 import java.util.Set;
 

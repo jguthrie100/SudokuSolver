@@ -1,3 +1,5 @@
+package base.sudoku.entity;
+
 import lombok.Getter;
 
 import java.util.HashSet;
@@ -27,8 +29,10 @@ public class Tile {
 
         this.value = value;
 
-        possibleValues.clear();
-        possibleValues.add(value);
+        if (value != null) {
+            possibleValues.clear();
+            possibleValues.add(value);
+        }
     }
 
     public void addPossibleValue(Integer value) {

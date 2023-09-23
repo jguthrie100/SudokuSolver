@@ -1,4 +1,7 @@
+package base.sudoku.entity;
+
 import lombok.Getter;
+import base.sudoku.BoardHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
