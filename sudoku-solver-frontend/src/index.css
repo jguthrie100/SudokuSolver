@@ -2,3 +2,9 @@
   display: grid;
   grid-template-columns: 1fr 450px 1fr;
 }
+
+#clearBtn, #submitBtn {
+  float: right;
+  margin-top: 20px;
+  margin-left: 20px;
+}

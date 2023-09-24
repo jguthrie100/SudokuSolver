@@ -1,13 +1,13 @@
 .tile {
   border: 1px solid #ccc;
   text-align: center;
-  padding: 15px 0;
+  padding: 12px 0;
   font-family: sans-serif;
 }
 
 .tile input {
-  font-size: 16px;
-  width: 10px;
+  font-size: 16pt;
+  width: 12px;
   text-align: center;
   border: 0;
   outline: 0;
@@ -17,18 +17,18 @@
   background-color: #e3e3e3;
 }
 
-.top {
+.tile-top {
   border-top: 2px solid #000;
 }
 
-.bottom {
+.tile-bottom {
   border-bottom: 2px solid #000;
 }
 
-.left {
+.tile-left {
   border-left: 2px solid #000;
 }
 
-.right {
+.tile-right {
   border-right: 2px solid #000;
 }
