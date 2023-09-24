@@ -82,21 +82,22 @@ public class BoardRunner {
         incrementPosition();
 
         if (iteration - lastChange > 500) {
-            System.out.println("State of board has not changed in the last 500 iterations. The puzzle is impossible to solve for this app");
+//            System.out.println("State of board has not changed in the last 500 iterations. The puzzle is impossible to solve for this app");
             return 2;
         }
 
         if (!board.toString().contains("-")) {
-            System.out.println("Sudoku Complete!");
+/*            System.out.println("Sudoku Complete!");
             System.out.println(board.toString());
+*/
             return 1;
         }
-
+/*
         System.out.println("Next iteration: " + iteration);
         System.out.println("Next position - Row: " + currentRow + ", Col: " + currentColumn);
         System.out.println(board.toString());
         System.out.println("\n_______________________________________________________\n");
-
+*/
         return -1;
     }
 

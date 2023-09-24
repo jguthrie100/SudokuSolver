@@ -4,3 +4,16 @@
   grid-template-columns: 50px 50px 50px 50px 50px 50px 50px 50px 50px;
   grid-template-rows: 50px 50px 50px 50px 50px 50px 50px 50px 50px;
 }
+
+#clearBtn, #submitBtn {
+  float: right;
+  margin-top: 20px;
+  margin-left: 20px;
+  border: 2px solid #aaa;
+}
+
+.title {
+  margin-top: 30px;
+  font-weight: bold;
+  font-size: 20px;
+}

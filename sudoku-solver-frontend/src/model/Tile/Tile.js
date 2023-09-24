@@ -29,6 +29,8 @@ function Tile({ id, classes, onChange, value }) {
       case "ArrowRight":
         if (col < 8) handleTileClick(null, row + "" + (col+1))
         break;
+      default:
+        break;
     }
   }
 

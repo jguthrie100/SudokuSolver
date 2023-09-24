@@ -59,11 +59,14 @@ function Board() {
 
   return (
     <div>
+      <div class="title">
+        Jamie's Sudoku Solver
+      </div>
       <div id="board">
         {tiles}
       </div>
-      <input id="submitBtn" type="button" value="Solve Puzzle" onClick={submitPuzzle} />
-      <input id="clearBtn" type="button" value="Clear Board" onClick={clearBoard} />
+      <input id="submitBtn" type="button" class="btn btnPrimary" value="Solve Puzzle" onClick={submitPuzzle} />
+      <input id="clearBtn" type="button" class="btn btnSecondary" value="Clear Board" onClick={clearBoard} />
     </div>
   );
 }
