@@ -60,7 +60,7 @@ function Board() {
   return (
     <div>
       <div class="title">
-        Jamie's Sudoku Solver
+        Le Sudoku Solver
       </div>
       <div id="board">
         {tiles}
