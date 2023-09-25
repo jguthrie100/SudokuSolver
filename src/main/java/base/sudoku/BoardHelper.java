@@ -57,7 +57,7 @@ public class BoardHelper {
             throw new IllegalArgumentException("Row number must be 0-8");
         }
 
-        return board.get(rowNo).stream().filter(tile -> tile.getValue() != null).map(Tile::getValue).collect(Collectors.toSet());
+        return board.get(rowNo).stream().map(Tile::getValue).filter(Objects::nonNull).collect(Collectors.toSet());
     }
 
     public static Set<Integer> columnValues(List<List<Tile>> board, int columnNo) {
@@ -65,7 +65,7 @@ public class BoardHelper {
             throw new IllegalArgumentException("Column number must be 0-8");
         }
 
-        return board.stream().map(row -> row.get(columnNo)).filter(tile -> tile.getValue() != null).map(Tile::getValue).collect(Collectors.toSet());
+        return board.stream().map(row -> row.get(columnNo)).map(Tile::getValue).filter(Objects::nonNull).collect(Collectors.toSet());
     }
 
     public static Set<Integer> sectionValues(List<List<Tile>> board, int sectionRow, int sectionColumn) {
@@ -294,7 +294,7 @@ public class BoardHelper {
                     .collect(Collectors.toSet());
 
             if (matchingTiles.size() == possibleValue.getValue().size()) {
-                Set<Integer> values = matchingTiles.stream().map(entry -> entry.getKey()).collect(Collectors.toSet());
+                Set<Integer> values = matchingTiles.stream().map(Map.Entry::getKey).collect(Collectors.toSet());
 
                 for (int rowI = (rowNo / 3) * 3; rowI < (rowNo / 3) * 3 + 3; rowI++) {
                     for (int colJ = (columnNo / 3) * 3; colJ < (columnNo / 3) * 3 + 3; colJ++) {
@@ -303,7 +303,6 @@ public class BoardHelper {
                 }
 
                 possibleValue.getValue()
-                        .stream()
                         .forEach(entry -> {
                             entry.getPossibleValues().clear();
                             entry.getPossibleValues().addAll(values);
