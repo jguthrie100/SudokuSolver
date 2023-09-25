@@ -69,8 +69,8 @@ public class BoardHelper {
     }
 
     public static Set<Integer> sectionValues(List<List<Tile>> board, int sectionRow, int sectionColumn) {
-        if (sectionRow < 0 || sectionRow > 8 || sectionColumn < 0 || sectionColumn > 8) {
-            throw new IllegalArgumentException("Row & Column numbers must be 0-8");
+        if (sectionRow < 0 || sectionRow > 2 || sectionColumn < 0 || sectionColumn > 2) {
+            throw new IllegalArgumentException("SectionRow & SectionColumn numbers must be 0-2");
         }
 
         Set<Integer> output = new HashSet<>();
